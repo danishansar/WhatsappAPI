@@ -6,8 +6,9 @@ require("dotenv").config();
 
 const app = express().use(body_parser.json());
 
-const token = process.env.TOKEN;
-const mytoken = process.env.MYTOKEN; //danish_token
+const token =
+  "EAAEYKeUEL5kBOxOSM1xWi1KJi6LiiaN74CcLT8TXbMfDb6CloCXTwe4Re4EEZAgIabfWpreUopLAwh1BxFed1nKhw1xnvpvgZC5JaRLsZBPZCx2kCDgF26LF4Bh2VymUwCtfvqbbsF5IbnRgnTu8NWc5A1QkU1hEjstOGunpsNOnwOUExIK21A7PpYZAQdCiMIht2N3NwBCEHAFkBNYuj";
+const mytoken = "justcheckingwhatsappwebhookapi123"; //danish_token
 
 app.listen(process.env.PORT, () => {
   console.log("webhook is listening");

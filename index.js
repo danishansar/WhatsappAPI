@@ -56,7 +56,7 @@ app.post("/webhook", (req, res) => {
 
   console.log(JSON.stringify(body_param, null, 2));
  
-    io.emit("WhatApp Message", JSON.stringify(body_param, null, 2));
+    io.emit("WhatApp Message", body_param, null, 2);
  
   if (body_param.object) {
     console.log("inside body param");

@@ -1,20 +1,34 @@
 const express = require("express");
-const body_parser = require("body-parser");
-// const axios = require("axios");
+const bodyParser = require("body-parser");
 const request = require("request");
 require("dotenv").config();
 
-const app = express().use(body_parser.json());
+const cors = require("cors");
+const http = require("http");
+
+const app = express();
+
+app.use(bodyParser.json());
+
+const server = http.createServer(app);
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+io.on("connection", () => {
+  console.log("Connected!");
+});
 
 const token =
   "EAAEYKeUEL5kBOxOSM1xWi1KJi6LiiaN74CcLT8TXbMfDb6CloCXTwe4Re4EEZAgIabfWpreUopLAwh1BxFed1nKhw1xnvpvgZC5JaRLsZBPZCx2kCDgF26LF4Bh2VymUwCtfvqbbsF5IbnRgnTu8NWc5A1QkU1hEjstOGunpsNOnwOUExIK21A7PpYZAQdCiMIht2N3NwBCEHAFkBNYuj";
 const mytoken = "justcheckingwhatsappwebhookapi123"; //danish_token
 
 app.listen(process.env.PORT, () => {
-  console.log("webhook is listening");
+  console.log("Whatsapp API webhook is listening :", process.env.PORT);
 });
 
-//to verify the callback url from dashboard side - cloud api side
 app.get("/webhook", (req, res) => {
   let mode = req.query["hub.mode"];
   let challange = req.query["hub.challenge"];
@@ -22,8 +36,7 @@ app.get("/webhook", (req, res) => {
 
   if (mode && token) {
     if (mode === "subscribe" && token === mytoken) {
-      console.log(challange)
-       res.status(200).send(challange);
+      res.status(200).send(challange);
     } else {
       res.status(403);
     }
@@ -34,7 +47,9 @@ app.post("/webhook", (req, res) => {
   let body_param = req.body;
 
   console.log(JSON.stringify(body_param, null, 2));
-
+  let socket = (i) => {
+    io.emit("WhatApp Message", JSON.stringify(body_param, null, 2));
+  };
   if (body_param.object) {
     console.log("inside body param");
     if (

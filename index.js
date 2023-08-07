@@ -33,7 +33,7 @@ const token =
   "EAAEYKeUEL5kBOxOSM1xWi1KJi6LiiaN74CcLT8TXbMfDb6CloCXTwe4Re4EEZAgIabfWpreUopLAwh1BxFed1nKhw1xnvpvgZC5JaRLsZBPZCx2kCDgF26LF4Bh2VymUwCtfvqbbsF5IbnRgnTu8NWc5A1QkU1hEjstOGunpsNOnwOUExIK21A7PpYZAQdCiMIht2N3NwBCEHAFkBNYuj";
 const mytoken = "justcheckingwhatsappwebhookapi123"; //danish_token
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log("Whatsapp API webhook is listening :", process.env.PORT);
 });
 

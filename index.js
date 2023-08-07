@@ -23,8 +23,10 @@ const io = require("socket.io")(server, {
     origin: "*",
   },
 });
-io.on("connection", () => {
+io.on("connection", (socket) => {
   console.log("Connected!");
+   socket.emit("join", "Love Stereo Again");
+
 });
 
 const token =

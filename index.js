@@ -25,7 +25,7 @@ const io = require("socket.io")(server, {
 });
 io.on("connection", (socket) => {
   console.log("Connected!");
-   socket.emit("join", "Love Stereo Again");
+   socket.emit("WhatApp Message", "Just For Whatsapp Testing");
 
 });
 
@@ -55,9 +55,9 @@ app.post("/webhook", (req, res) => {
   let body_param = req.body;
 
   console.log(JSON.stringify(body_param, null, 2));
-  let socket = (i) => {
+ 
     io.emit("WhatApp Message", JSON.stringify(body_param, null, 2));
-  };
+ 
   if (body_param.object) {
     console.log("inside body param");
     if (

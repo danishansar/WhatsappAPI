@@ -10,6 +10,12 @@ const app = express();
 
 app.use(bodyParser.json());
 
+/* cors policy */
+app.use(cors());
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
